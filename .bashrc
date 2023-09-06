@@ -72,6 +72,10 @@ PROMPT_COMMAND=prompt
 if [ -x /usr/bin/dircolors ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
+if command -v gdircolors >/dev/null; then
+  test -r ~/.dircolors && eval "$(gdircolors -b ~/.dircolors)" || eval "$(gdircolors -b)"
+fi
+
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
@@ -140,6 +144,8 @@ if [ -f ~/.fzf.bash ]; then
   bind -m emacs-standard '"\C-p": " \C-b\C-k \C-u`__fzf_cd__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d"'
   bind -m vi-command '"\C-p": __fzf_cd__'
   bind -m vi-insert '"\C-p": __fzf_cd__'
+
+  [ -f ~/.dotfiles/fzf-git.sh ] && . ~/.dotfiles/fzf-git.sh
 
 fi
 
