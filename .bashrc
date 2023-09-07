@@ -9,6 +9,9 @@ esac
 # disable warning in OSX
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
+# add local bin path
+export PATH="~/.local/bin:$PATH"
+
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
 # append to the history file, don't overwrite it
