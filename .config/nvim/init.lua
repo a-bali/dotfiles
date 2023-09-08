@@ -52,6 +52,9 @@ require("lazy").setup({
   "lewis6991/gitsigns.nvim"
 },
 {
+  "ibhagwan/fzf-lua"
+},
+{
   "ojroques/nvim-hardline",
   lazy = false
 }
@@ -126,5 +129,15 @@ require("nvim-treesitter.configs").setup({
   indent = { enable = true },  
 })
 
+-- fzf-lua setup
+
+bind("n", "<C-b>", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], {})
+bind("n", "<C-k>", [[<Cmd>lua require"fzf-lua".builtin()<CR>]], {})
+bind("n", "<C-t>", [[<Cmd>lua require"fzf-lua".files()<CR>]], {})
+bind("n", "<C-l>", [[<Cmd>lua require"fzf-lua".live_grep_glob()<CR>]], {})
+bind("n", "<C-g>", [[<Cmd>lua require"fzf-lua".grep_project()<CR>]], {})
+
 require('gitsigns').setup()
 require('hardline').setup()
+require('fzf-lua').setup({'fzf-native'})
+
