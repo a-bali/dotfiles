@@ -47,6 +47,13 @@ require("lazy").setup({
   "tpope/vim-fugitive",
   lazy = true,
   cmd = "Git"
+},
+{
+  "lewis6991/gitsigns.nvim"
+},
+{
+  "ojroques/nvim-hardline",
+  lazy = false
 }
 }
 )
@@ -118,3 +125,6 @@ require("nvim-treesitter.configs").setup({
   highlight = { enable = true, additional_vim_regex_highlighting = true },
   indent = { enable = true },  
 })
+
+require('gitsigns').setup()
+require('hardline').setup()
