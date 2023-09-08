@@ -40,7 +40,7 @@ require("lazy").setup({
   opts = {},
 },
 {
-  "nvim-treesitter/nvim-treesitter", 
+  "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
 },
 {
@@ -55,6 +55,12 @@ require("lazy").setup({
   "ibhagwan/fzf-lua"
 },
 {
+  "nvim-treesitter/nvim-treesitter-context"
+},
+{
+  "tpope/vim-sleuth"
+},
+{
   "ojroques/nvim-hardline",
   lazy = false
 }
@@ -67,7 +73,10 @@ local bind = vim.keymap.set
 local remap = {remap = true}
 
 -- General config
+vim.opt.number = true
 vim.opt.tabstop = 2
+vim.cmd[[highlight RedundantSpaces ctermbg=red guibg=red]]
+vim.cmd[[match RedundantSpaces /\s\+$/]]
 
 -- WhichKey config
 bind('n','<F1>', ':WhichKey<CR>')
@@ -126,7 +135,7 @@ require("nvim-treesitter.configs").setup({
   ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "html", "css", "go", "python"},
   sync_install = false,
   highlight = { enable = true, additional_vim_regex_highlighting = true },
-  indent = { enable = true },  
+  indent = { enable = false },
 })
 
 -- fzf-lua setup
