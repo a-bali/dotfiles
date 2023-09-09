@@ -1,3 +1,8 @@
+-- TODO
+-- Beancount completion
+-- Completion
+-- Ctrl-k git status?
+
 -- Install Lazy plugin manager
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -28,14 +33,12 @@ require("lazy").setup({
 {
   "nvim-tree/nvim-tree.lua",
   version = "*",
-  lazy = false,
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
 },
 {
   "folke/tokyonight.nvim",
-  lazy = false,
   priority = 1000,
   opts = {},
 },
@@ -45,7 +48,6 @@ require("lazy").setup({
 },
 {
   "tpope/vim-fugitive",
-  lazy = true,
   cmd = "Git"
 },
 {
@@ -61,8 +63,26 @@ require("lazy").setup({
   "tpope/vim-sleuth"
 },
 {
+  "nathangrigg/vim-beancount"
+},
+{
+  "bronson/vim-trailing-whitespace"
+},
+
+{
   "ojroques/nvim-hardline",
-  lazy = false
+},
+{
+  'stevearc/aerial.nvim',
+  opts = {},
+  dependencies = {
+     "nvim-treesitter/nvim-treesitter",
+     "nvim-tree/nvim-web-devicons"
+  },
+},
+{
+  'nvim-telescope/telescope.nvim', tag = '0.1.2',
+  dependencies = { 'nvim-lua/plenary.nvim' }
 }
 }
 )
@@ -75,8 +95,6 @@ local remap = {remap = true}
 -- General config
 vim.opt.number = true
 vim.opt.tabstop = 2
-vim.cmd[[highlight RedundantSpaces ctermbg=red guibg=red]]
-vim.cmd[[match RedundantSpaces /\s\+$/]]
 
 -- WhichKey config
 bind('n','<F1>', ':WhichKey<CR>')
@@ -132,7 +150,9 @@ require("nvim-tree").setup({
 
 -- Nvim-treesitter setup
 require("nvim-treesitter.configs").setup({
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "html", "css", "go", "python"},
+  ensure_installed = {
+    "c", "lua", "vim", "vimdoc", "query", "javascript", "html", "css", "go", "python",
+    "bash", "yaml", "beancount", "terraform", "svelte", "xml"},
   sync_install = false,
   highlight = { enable = true, additional_vim_regex_highlighting = true },
   indent = { enable = false },
@@ -149,4 +169,10 @@ bind("n", "<C-g>", [[<Cmd>lua require"fzf-lua".grep_project()<CR>]], {})
 require('gitsigns').setup()
 require('hardline').setup()
 require('fzf-lua').setup({'fzf-native'})
+
+require('aerial').setup()
+bind("n", "<F4>", '<cmd>AerialToggle!<CR>')
+
+require('telescope').setup()
+bind("n", "<C-f>", [[<Cmd>lua require"telescope.builtin".treesitter {}<CR>]], {})
 
