@@ -1,7 +1,6 @@
 -- TODO
 -- Beancount completion
 -- Completion
--- Ctrl-k git status?
 
 -- Install Lazy plugin manager
 
@@ -95,6 +94,7 @@ local remap = {remap = true}
 -- General config
 vim.opt.number = true
 vim.opt.tabstop = 2
+vim.g.mapleader = ","
 
 -- WhichKey config
 bind('n','<F1>', ':WhichKey<CR>')
@@ -160,11 +160,13 @@ require("nvim-treesitter.configs").setup({
 
 -- fzf-lua setup
 
-bind("n", "<C-b>", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], {})
-bind("n", "<C-k>", [[<Cmd>lua require"fzf-lua".builtin()<CR>]], {})
-bind("n", "<C-t>", [[<Cmd>lua require"fzf-lua".files()<CR>]], {})
-bind("n", "<C-l>", [[<Cmd>lua require"fzf-lua".live_grep_glob()<CR>]], {})
-bind("n", "<C-g>", [[<Cmd>lua require"fzf-lua".grep_project()<CR>]], {})
+bind("n", "<leader>bf", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], {})
+bind("n", "<leader>bu", [[<Cmd>lua require"fzf-lua".builtin()<CR>]], {})
+bind("n", "<leader>t", [[<Cmd>lua require"fzf-lua".files({ cwd="~" } )<CR>]], {})
+bind("n", "<leader>lg", [[<Cmd>lua require"fzf-lua".live_grep_glob({ cwd=vim.fn.expand('%:p:h') })<CR>]], {})
+bind("n", "<leader>gr", [[<Cmd>lua require"fzf-lua".grep_project({ cwd=vim.fn.expand('%:p:h') })<CR>]], {})
+bind("n", "<leader>gf", [[<Cmd>lua require"fzf-lua".git_files({ cwd=vim.fn.expand('%:p:h') })<CR>]], {})
+bind("n", "<leader>gl", [[<Cmd>lua require"fzf-lua".git_commits({ cwd=vim.fn.expand('%:p:h') })<CR>]], {})
 
 require('gitsigns').setup()
 require('hardline').setup()
@@ -174,5 +176,5 @@ require('aerial').setup()
 bind("n", "<F4>", '<cmd>AerialToggle!<CR>')
 
 require('telescope').setup()
-bind("n", "<C-f>", [[<Cmd>lua require"telescope.builtin".treesitter {}<CR>]], {})
+bind("n", "<leader>fn", [[<Cmd>lua require"telescope.builtin".treesitter {}<CR>]], {})
 
