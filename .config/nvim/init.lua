@@ -1,7 +1,3 @@
--- TODO
--- Beancount completion
--- Completion
-
 -- Install Lazy plugin manager
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -74,6 +70,11 @@ require("lazy").setup({
   "ojroques/nvim-hardline",
 },
 {
+  "akinsho/bufferline.nvim",
+  version = "*",
+  dependencies = 'nvim-tree/nvim-web-devicons'
+},
+{
   "lukas-reineke/indent-blankline.nvim"
 },
 {
@@ -85,8 +86,11 @@ require("lazy").setup({
   },
 },
 {
-  'nvim-telescope/telescope.nvim', tag = '0.1.2',
-  dependencies = { 'nvim-lua/plenary.nvim' }
+  'nvim-telescope/telescope.nvim',
+  tag = '0.1.2',
+  dependencies = {
+    'nvim-lua/plenary.nvim'
+  }
 },
 {
     'numToStr/Comment.nvim',
@@ -110,7 +114,7 @@ vim.opt.termguicolors = true
 bind('n','<F1>', ':WhichKey<CR>')
 
 -- Neo-tree config
-bind('n', '<F8>', ':Neotree<CR>')
+bind('n', '<F8>', ':Neotree toggle<CR>')
 
 require("nvim-web-devicons").setup({
   default = true
@@ -148,6 +152,20 @@ require("neo-tree").setup({
       folder_empty_open = "",
     },
     modified = { symbol = "" },
+    git_status = {
+      symbols = {
+        added = "",
+        modified = "",
+        removed = "",
+        renamed = "➜",
+        untracked = "",
+        ignored = "",
+        unstaged = "U",
+        staged = "",
+        conflict = "",
+        deleted = "",
+      }
+    }
   },
   source_selector = {
       winbar = true,
@@ -196,6 +214,7 @@ vim.keymap.set({ "n", "v", "i" }, "<C-x><C-f>",
 
 require('gitsigns').setup()
 require('hardline').setup()
+require('bufferline').setup()
 require('fzf-lua').setup({'fzf-native'})
 
 require('aerial').setup()
