@@ -51,9 +51,6 @@ require("lazy").setup({
   "lewis6991/gitsigns.nvim"
 },
 {
-  "ibhagwan/fzf-lua"
-},
-{
   "nvim-treesitter/nvim-treesitter-context"
 },
 {
@@ -107,8 +104,10 @@ local remap = {remap = true}
 vim.opt.number = true
 vim.opt.tabstop = 2
 vim.g.mapleader = ","
--- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
+vim.opt.laststatus = 3
+
+bind('n', '<leader>cd', ':cd %:p:h<CR>:pwd<CR>')
 
 -- WhichKey config
 bind('n','<F1>', ':WhichKey<CR>')
@@ -199,29 +198,24 @@ require("nvim-treesitter.configs").setup({
   indent = { enable = false },
 })
 
--- fzf-lua setup
+-- telescope setup
 
-bind("n", "<C-t>", [[<Cmd>lua require"fzf-lua".files({ cwd="~" } )<CR>]], {})
-bind("n", "<leader>bf", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], {})
-bind("n", "<leader>bu", [[<Cmd>lua require"fzf-lua".builtin()<CR>]], {})
-bind("n", "<leader>lg", [[<Cmd>lua require"fzf-lua".live_grep_glob()<CR>]], {})
-bind("n", "<leader>gr", [[<Cmd>lua require"fzf-lua".grep_project()<CR>]], {})
-bind("n", "<leader>gf", [[<Cmd>lua require"fzf-lua".git_files()<CR>]], {})
-bind("n", "<leader>gl", [[<Cmd>lua require"fzf-lua".git_commits()<CR>]], {})
-vim.keymap.set({ "n", "v", "i" }, "<C-x><C-f>",
-  function() require("fzf-lua").complete_path() end,
-  { silent = true, desc = "Fuzzy complete path" })
+require('telescope').setup()
+bind("n", "<c-t>",      [[<cmd>lua require"telescope.builtin".find_files()<cr>]], {})
+bind("n", "<leader>bf", [[<cmd>lua require"telescope.builtin".buffers()<cr>]], {})
+bind("n", "<leader>bu", [[<cmd>lua require"telescope.builtin".builtin()<cr>]], {})
+bind("n", "<leader>lg", [[<Cmd>lua require"telescope.builtin".live_grep()<CR>]], {})
+bind("n", "<leader>gr", [[<Cmd>lua require"telescope.builtin".grep_string()<CR>]], {})
+bind("n", "<leader>gf", [[<Cmd>lua require"telescope.builtin".git_status()<CR>]], {})
+bind("n", "<leader>gl", [[<Cmd>lua require"telescope.builtin".git_commits()<CR>]], {})
+bind("n", "<leader>fn", [[<Cmd>lua require"telescope.builtin".treesitter {}<CR>]], {})
 
 require('gitsigns').setup()
 require('hardline').setup()
 require('bufferline').setup()
-require('fzf-lua').setup({'fzf-native'})
 
 require('aerial').setup()
 bind("n", "<F4>", '<cmd>AerialToggle!<CR>')
-
-require('telescope').setup()
-bind("n", "<leader>fn", [[<Cmd>lua require"telescope.builtin".treesitter {}<CR>]], {})
 
 require('Comment').setup()
 
