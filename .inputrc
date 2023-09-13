@@ -2,3 +2,5 @@ set colored-stats on
 set colored-completion-prefix on
 "\e[1~": beginning-of-line
 "\e[4~": end-of-line
+"\e\e[D": backward-word
+"\e\e[C": forward-word
