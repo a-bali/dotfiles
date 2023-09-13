@@ -91,6 +91,10 @@ require("lazy").setup({
 	{
 		"numToStr/Comment.nvim",
 	},
+	{
+    'goolord/alpha-nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+  }
 })
 
 vim.cmd([[colorscheme tokyonight]])
@@ -178,6 +182,11 @@ require("neo-tree").setup({
 			hide_dotfiles = false,
 			hide_gitignored = false,
 		},
+		find_args = {
+			fd = {
+				"-d", "1"
+			}
+		},
 		follow_current_file = {
 			enabled = true,
 		},
@@ -214,7 +223,7 @@ require("nvim-treesitter.configs").setup({
 -- Telescope config
 
 require("telescope").setup()
-bind("n", "<c-t>", [[<cmd>lua require"telescope.builtin".find_files()<cr>]], {})
+bind("n", "<c-t>", [[<cmd>lua require"telescope.builtin".find_files({ hidden = true })<cr>]], {})
 bind("n", "<leader>bf", [[<cmd>lua require"telescope.builtin".buffers()<cr>]], {})
 bind("n", "<leader>bu", [[<cmd>lua require"telescope.builtin".builtin()<cr>]], {})
 bind("n", "<leader>lg", [[<Cmd>lua require"telescope.builtin".live_grep()<CR>]], {})
@@ -235,6 +244,7 @@ require("indent_blankline").setup({
 })
 
 -- Misc config
+require'alpha'.setup(require'alpha.themes.startify'.config)
 
 require("gitsigns").setup()
 require("hardline").setup()
