@@ -92,9 +92,26 @@ require("lazy").setup({
 		"numToStr/Comment.nvim",
 	},
 	{
-    'goolord/alpha-nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-  }
+		"goolord/alpha-nvim",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+		},
+	},
+	{
+		"hrsh7th/nvim-cmp",
+	},
+	{
+		"hrsh7th/cmp-path",
+	},
+	{
+		"hrsh7th/cmp-buffer",
+	},
+	{
+		"hrsh7th/cmp-cmdline",
+	},
+	{
+		"ray-x/cmp-treesitter",
+	},
 })
 
 vim.cmd([[colorscheme tokyonight]])
@@ -104,6 +121,7 @@ local remap = { remap = true }
 
 -- General config
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.tabstop = 2
 vim.g.mapleader = ","
 vim.opt.termguicolors = true
@@ -184,8 +202,9 @@ require("neo-tree").setup({
 		},
 		find_args = {
 			fd = {
-				"-d", "1"
-			}
+				"-d",
+				"1",
+			},
 		},
 		follow_current_file = {
 			enabled = true,
@@ -244,7 +263,7 @@ require("indent_blankline").setup({
 })
 
 -- Misc config
-require'alpha'.setup(require'alpha.themes.startify'.config)
+require("alpha").setup(require("alpha.themes.startify").config)
 
 require("gitsigns").setup()
 require("hardline").setup()
@@ -255,3 +274,38 @@ bind("n", "<F4>", "<cmd>AerialToggle!<CR>")
 
 require("Comment").setup()
 
+-- nvim-cmp setup
+local cmp = require("cmp")
+cmp.setup({
+	view = {
+		entries = { name = "wildmenu", separator = "|" },
+	},
+	mapping = {
+		["<C-e>"] = cmp.mapping.close(),
+		["<CR>"] = cmp.mapping.confirm({
+			behavior = cmp.ConfirmBehavior.Replace,
+			select = true,
+		}),
+		["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+		["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+	},
+	sources = {
+		{ name = "buffer" },
+		{ name = "path" },
+		{ name = "treesitter" },
+	},
+})
+cmp.setup.cmdline({ "/", "?" }, {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+		{ name = "buffer" },
+	},
+})
+cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
+		{ name = "path" },
+	}, {
+		{ name = "cmdline" },
+	}),
+})
