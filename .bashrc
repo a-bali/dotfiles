@@ -47,7 +47,7 @@ COLOR_PURPLE='\[\033[0;35m\]'
 COLOR_GREEN='\[\033[0;32m\]'
 COLOR_RESET='\[\033[0m\]'
 
-function git_prompt() {
+function _git_prompt() {
   if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
     branch_name=$(git symbolic-ref -q HEAD)
     branch_name=${branch_name##refs/heads/}
@@ -65,7 +65,7 @@ function git_prompt() {
 }
 
 function prompt() {
-  PS1="$TITLE$COLOR_SEPARATOR[$COLOR_YELLOW\u$COLOR_SEPARATOR@$COLOR_GREEN\h $COLOR_CYAN\w$COLOR_RESET $(git_prompt)$COLOR_SEPARATOR]\$ $COLOR_RESET"
+  PS1="$TITLE$COLOR_SEPARATOR[$COLOR_YELLOW\u$COLOR_SEPARATOR@$COLOR_GREEN\h $COLOR_CYAN\w$COLOR_RESET $(_git_prompt)$COLOR_SEPARATOR]\$ $COLOR_RESET"
 }
 
 PROMPT_COMMAND=prompt
