@@ -4,5 +4,4 @@ if [ -f $HOME/.bashrc ]; then
     . $HOME/.bashrc
 fi
 
-unset -f git_prompt
-function git_prompt() {}
+unset -f _git_prompt
