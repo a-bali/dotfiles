@@ -4,5 +4,6 @@
 
 local map = vim.keymap.set
 map("n", "<F8>", ":Neotree toggle<CR>", { desc = "Toggle Neotree" })
-map("n", "<F4>", "<cmd>AerialToggle!<CR>")
-
+map("n", "<F4>", "<cmd>AerialToggle!<CR>", { desc = "Toggle Aerial" })
+map("n", "<leader>tw", "<cmd>Twilight<CR>", { desc = "Toggle Twilight" })
+map("n", "<leader>uu", "<cmd>UndotreeToggle<CR>", { desc = "Toggle Undotree" })

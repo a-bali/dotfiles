@@ -27,6 +27,9 @@ shopt -s checkwinsize
 # dotfiles management
 alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 
+# set locale for MacOS
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
 
 # prompt and terminal title
 
