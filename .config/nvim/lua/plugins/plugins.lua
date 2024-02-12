@@ -10,17 +10,6 @@ return {
   { "folke/twilight.nvim" },
   { "mbbill/undotree" },
 
-  -- disable all LSP related lazyvim plugins
-  { "neovim/nvim-lspconfig", enabled = false },
-  { "folke/neodev.nvim", enabled = false },
-  { "williamboman/mason.nvim", enabled = false },
-  { "williamboman/mason-lspconfig.nvim", enabled = false },
-  { "cmp-nvim-lsp", enabled = false },
-  -- disable snippets
-  { "L3MON4D3/LuaSnip", enabled = false },
-  { "rafamadriz/friendly-snippets", enabled = false },
-  { "saadparwaiz1/cmp_luasnip", enabled = false },
-
   -- customize neo-tree
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -31,15 +20,6 @@ return {
           hide_gitignored = false,
         },
       },
-    },
-  },
-
-  -- remove treesitter and "cmp-nvim-lsp"
-  {
-    "RRethy/vim-illuminate",
-    opts = {
-      providers = { "regex" },
-      large_file_overrides = nil,
     },
   },
 
@@ -73,7 +53,7 @@ return {
     },
   },
 
-  -- customize conform."nvim-neo-tree/neo-tree.nvim"
+  -- customize conform
   {
     "stevearc/conform.nvim",
     opts = {
