@@ -59,6 +59,7 @@ return {
     opts = {
       formatters_by_ft = {
         beancount = { "bean-format" },
+        javascript = { "prettier" },
       },
     },
   },

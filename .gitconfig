@@ -1,0 +1,13 @@
+[user]
+    name = Andras Bali
+    email = andras.bali@gmail.com
+[commit]
+    verbose = true
+[init]
+    defaultBranch = main
+[tag]
+    sort = version:refname
+[pager]
+    diff = riff
+    show = riff
+    log = riff
