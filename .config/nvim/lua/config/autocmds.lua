@@ -8,13 +8,20 @@ vim.filetype.add({
   },
 })
 
-local cmp = require("cmp")
+local lspconfig = require("lspconfig")
+lspconfig.beancount.setup({
+  init_options = {
+    journal_file = "/home/bali/beancount/beancount.journal",
+  },
+ })
 
+local cmp = require("cmp")
 cmp.setup.filetype("beancount", {
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
     { name = "omni" },
   }, {
-    { name = "treesitter" },
+    -- { name = "treesitter" },
   }),
 })
+
