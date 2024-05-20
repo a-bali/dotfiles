@@ -25,3 +25,6 @@ cmp.setup.filetype("beancount", {
   }),
 })
 
+if vim.g.neovide then
+  vim.o.guifont = "Hack Nerd Font Mono:h13"
+end

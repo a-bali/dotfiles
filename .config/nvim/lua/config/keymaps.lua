@@ -5,6 +5,10 @@
 local map = vim.keymap.set
 map("n", "<F8>", ":Neotree toggle<CR>", { desc = "Toggle Neotree" })
 map("n", "<F4>", "<cmd>AerialToggle!<CR>", { desc = "Toggle Aerial" })
+map("n", "<F5>", "<cmd>ToggleTerm<CR>", { desc = "Toggle Terminal" })
+map("n", "<leader>td", "<cmd>ToggleTerm<CR>", { desc = "Toggle Terminal" })
+map("n", "<leader>t2h", "<cmd>2ToggleTerm<CR>", { desc = "Toggle Terminal" })
+map("n", "<leader>t2v", "<cmd>2ToggleTerm direction=vertical<CR>", { desc = "Toggle Terminal" })
 map("n", "<leader>tw", "<cmd>Twilight<CR>", { desc = "Toggle Twilight" })
 map("n", "<leader>uu", "<cmd>UndotreeToggle<CR>", { desc = "Toggle Undotree" })
 map("n", "<F9>", ":make<CR>", { desc = "Run :make" })

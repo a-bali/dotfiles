@@ -9,6 +9,7 @@ return {
   { "ntpeters/vim-better-whitespace" },
   { "folke/twilight.nvim" },
   { "mbbill/undotree" },
+  { "akinsho/toggleterm.nvim", version = "*", config = true },
 
   -- customize neo-tree
   {
@@ -49,6 +50,8 @@ return {
         "svelte",
         "xml",
         "rust",
+        "css",
+        "scss",
       },
     },
   },
