@@ -2,8 +2,8 @@
 
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+*i*) ;;
+*) return ;;
 esac
 
 # disable warning in OSX
@@ -31,16 +31,20 @@ alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
+# Ghostty shell integration
+if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
+  builtin source "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
+fi
+
 # prompt and terminal title
-
 case "$TERM" in
-xterm*|rxvt*)
-    TITLE="\[\e]0;\u@\h: \w\a\]"
-    ;;
+xterm* | rxvt*)
+  TITLE="\[\e]0;\u@\h: \w\a\]"
+  ;;
 *)
-    TITLE="";;
+  TITLE=""
+  ;;
 esac
-
 
 COLOR_SEPARATOR='\[\033[0;34m\]'
 COLOR_CYAN='\[\033[1;36m\]'
@@ -51,14 +55,14 @@ COLOR_GREEN='\[\033[0;32m\]'
 COLOR_RESET='\[\033[0m\]'
 
 function _git_prompt() {
-  if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+  if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     branch_name=$(git symbolic-ref -q HEAD)
     branch_name=${branch_name##refs/heads/}
     branch_name=${branch_name:-HEAD}
 
-    if [[ $(git status 2> /dev/null | tail -n1) = *"nothing to commit"* ]]; then
+    if [[ $(git status 2>/dev/null | tail -n1) = *"nothing to commit"* ]]; then
       echo -n "$COLOR_GREEN$branch_name$COLOR_RESET"
-    elif [[ $(git status 2> /dev/null | head -n5) = *"Changes to be committed"* ]]; then
+    elif [[ $(git status 2>/dev/null | head -n5) = *"Changes to be committed"* ]]; then
       echo -n "$COLOR_YELLOW$branch_name$COLOR_RESET"
     else
       echo -n "$COLOR_PURPLE$branch_name*$COLOR_RESET"
@@ -73,7 +77,6 @@ function prompt() {
 
 PROMPT_COMMAND=prompt
 
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -81,7 +84,6 @@ fi
 if command -v gdircolors >/dev/null; then
   test -r ~/.dircolors && eval "$(gdircolors -b ~/.dircolors)" || eval "$(gdircolors -b)"
 fi
-
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
@@ -100,7 +102,6 @@ export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
-
 # load bash completion
 
 [ -f /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
@@ -112,15 +113,15 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 if [ -f ~/.fzf.bash ]; then
   source ~/.fzf.bash
 
-  if command -v fd > /dev/null; then
+  if command -v fd >/dev/null; then
     export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --color=always --follow --hidden --exclude .git"
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     export FZF_ALT_C_COMMAND="fd --type d --strip-cwd-prefix --color=always --follow --hidden --exclude .git"
-    _fzf_compgen_path() { 
-      fd --hidden --follow --exclude ".git" . "$1" 
+    _fzf_compgen_path() {
+      fd --hidden --follow --exclude ".git" . "$1"
     }
-    _fzf_compgen_dir() { 
-      fd --type d --hidden --follow --exclude ".git" . "$1" 
+    _fzf_compgen_dir() {
+      fd --type d --hidden --follow --exclude ".git" . "$1"
     }
   fi
 
@@ -129,10 +130,10 @@ if [ -f ~/.fzf.bash ]; then
     shift
 
     case "$command" in
-      cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
-      export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
-      ssh)          fzf --preview 'dig {}'                   "$@" ;;
-      *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
+    cd) fzf --preview 'tree -C {} | head -200' "$@" ;;
+    export | unset) fzf --preview "eval 'echo \$'{}" "$@" ;;
+    ssh) fzf --preview 'dig {}' "$@" ;;
+    *) fzf --preview 'bat -n --color=always {}' "$@" ;;
     esac
   }
 
@@ -154,4 +155,3 @@ if [ -f ~/.fzf.bash ]; then
   [ -f ~/.dotfiles/fzf-git.sh ] && . ~/.dotfiles/fzf-git.sh
 
 fi
-

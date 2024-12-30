@@ -3,4 +3,3 @@
 -- Add any additional options here
 
 vim.opt.listchars:append("trail:⋅")
-vim.g.better_whitespace_filetypes_blacklist = { "neo-tree", "dashboard" }

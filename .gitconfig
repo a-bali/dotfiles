@@ -11,3 +11,5 @@
     diff = riff
     show = riff
     log = riff
+[pull]
+	rebase = true

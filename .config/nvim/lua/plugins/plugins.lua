@@ -6,7 +6,6 @@ return {
   { "hrsh7th/cmp-omni" },
   { "ray-x/cmp-treesitter" },
   { "tpope/vim-sleuth" },
-  { "ntpeters/vim-better-whitespace" },
   { "folke/twilight.nvim" },
   { "mbbill/undotree" },
   { "akinsho/toggleterm.nvim", version = "*", config = true },
